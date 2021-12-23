@@ -1,17 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, {useContext} from "react";
+import githubContext from "../Context/githubContext";
 import Spinner from "./Spinner";
 import UserItem from "./UserItem";
 
-export default function Users(props) {
-
-    if(props.loading){
+export default function Users() {
+const context = useContext(githubContext);
+    if(context.loading){
         return <Spinner/>
     }
     else{
         return (
             <div style={userStyle}>
                   <>
-                   {props.users && props.users && props.users.map((user) => {
+                   {context.users && context.users.map((user) => {
                     return <UserItem user={user} />;
                   })}
                   </>

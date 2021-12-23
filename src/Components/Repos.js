@@ -1,16 +1,10 @@
 import React, { useState } from 'react'
 import Repo from './Repo'
-import Spinner from './Spinner'
 
 export default function Repos(props) {
     const [showMore,setShowMore] = useState(false)
     return (
         <div>
-            {
-                props.loading && ( 
-                    <Spinner/>
-                )
-            }
             {
               showMore === false ? (<React.Fragment>
                   {

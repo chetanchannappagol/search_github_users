@@ -1,6 +1,8 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
+import githubContext from "../Context/githubContext";
 
-export default function Search(props) {
+export default function Search() {
+  const context = useContext(githubContext)
     const [SearchValue, setSearchValue] = useState('');
     function onChangeHandler(val){
         setSearchValue(val.target.value)
@@ -8,15 +10,13 @@ export default function Search(props) {
     function onSubmitHandler(e){
         e.preventDefault();
         if(SearchValue.length > 0){
-          props.SearchUser(SearchValue)
+          context.SearchUser(SearchValue)
           setSearchValue('')
-          props.setAlert('please enter somthing','light')
         }
         else{
-          props.setAlert('please enter somthing','light')
+          context.setAlert('please enter somthing','light')
         }
     }
-    console.log(SearchValue)
     
   return (
     <div>
@@ -29,7 +29,7 @@ export default function Search(props) {
         />
       </form>
       {
-        props.showClear &&  <button className="btn btn-light btn-block" type='button' onClick={()=>props.onClear()}>Clear</button>
+        context.users.length > 0 &&  <button className="btn btn-light btn-block" type='button' onClick={()=>context.clearUser()}>Clear</button>
           }
     </div>
   );

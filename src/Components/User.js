@@ -1,18 +1,16 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
 import Repos from "./Repos";
 import Spinner from "./Spinner";
+import githubContext from "../Context/githubContext";
 
+  
 export default function User(props) {
+  const context = useContext(githubContext);
   useEffect(() => {
-    props.getUser(props.match.params.login);
+    context.getUser(props.match.params.login);
   }, []);
 
-  //   componentDidMount() {
-  //     this.props.getUser(this.props.match.params.login);
-  //     // this.props.getUserRepos(this.props.match.params.login);
-  //   }
-  //   render() {
   const {
     name,
     avatar_url,
@@ -27,8 +25,8 @@ export default function User(props) {
     public_repos,
     public_gists,
     hireable,
-  } = props.user;
-  const { loading, repos } = props;
+  } = context.user;
+  const { loading, repos } = context;
   if (loading) {
     return <Spinner />;
   } else {
